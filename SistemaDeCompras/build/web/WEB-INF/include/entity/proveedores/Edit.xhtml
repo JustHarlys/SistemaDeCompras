@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ProveedoresEditDlg" widgetVar="ProveedoresEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{harlys.EditProveedoresTitle}" closeOnEscape="true">
+
+            <h:form id="ProveedoresEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{proveedoresController.selected != null}">
+
+
+                        <h:outputLabel value="#{harlys.EditProveedoresLabel_idproveedor}" for="idproveedor" />
+                        <h:outputText id="idproveedor" value="#{proveedoresController.selected.idproveedor}" />
+
+                        <p:outputLabel value="#{harlys.EditProveedoresLabel_cedulaORnc}" for="cedulaORnc" />
+                        <p:inputText id="cedulaORnc" value="#{proveedoresController.selected.cedulaORnc}" title="#{harlys.EditProveedoresTitle_cedulaORnc}" required="true" requiredMessage="#{harlys.EditProveedoresRequiredMessage_cedulaORnc}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{harlys.EditProveedoresLabel_nombrecomercial}" for="nombrecomercial" />
+                        <p:inputText id="nombrecomercial" value="#{proveedoresController.selected.nombrecomercial}" title="#{harlys.EditProveedoresTitle_nombrecomercial}" required="true" requiredMessage="#{harlys.EditProveedoresRequiredMessage_nombrecomercial}" size="26" maxlength="26"/>
+
+                        <p:outputLabel value="#{harlys.EditProveedoresLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{proveedoresController.selected.estado}" title="#{harlys.EditProveedoresTitle_estado}" required="true" requiredMessage="#{harlys.EditProveedoresRequiredMessage_estado}" size="100" maxlength="100"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{proveedoresController.save}" value="#{harlys.Save}" update="display,:ProveedoresListForm:datalist,:ProveedoresListForm:ProveedoresDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProveedoresEditDialog'));">
+                        <p:confirm header="#{harlys.ConfirmationHeader}" message="#{harlys.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{harlys.Cancel}" oncomplete="PF('ProveedoresEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

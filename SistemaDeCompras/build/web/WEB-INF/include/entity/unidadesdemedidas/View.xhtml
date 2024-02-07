@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UnidadesdemedidasViewDlg" widgetVar="UnidadesdemedidasViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{harlys.ViewUnidadesdemedidasTitle}" closeOnEscape="true">
+
+            <h:form id="UnidadesdemedidasViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{unidadesdemedidasController.selected != null}">
+
+                        <h:outputText value="#{harlys.ViewUnidadesdemedidasLabel_idumedida}"/>
+                        <h:outputText value="#{unidadesdemedidasController.selected.idumedida}" title="#{harlys.ViewUnidadesdemedidasTitle_idumedida}"/>
+
+                        <h:outputText value="#{harlys.ViewUnidadesdemedidasLabel_descripcion}"/>
+                        <h:outputText value="#{unidadesdemedidasController.selected.descripcion}" title="#{harlys.ViewUnidadesdemedidasTitle_descripcion}"/>
+
+                        <h:outputText value="#{harlys.ViewUnidadesdemedidasLabel_estado}"/>
+                        <h:outputText value="#{unidadesdemedidasController.selected.estado}" title="#{harlys.ViewUnidadesdemedidasTitle_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{harlys.Close}" onclick="PF('UnidadesdemedidasViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

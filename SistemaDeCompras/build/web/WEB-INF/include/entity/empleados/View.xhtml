@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EmpleadosViewDlg" widgetVar="EmpleadosViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{harlys.ViewEmpleadosTitle}" closeOnEscape="true">
+
+            <h:form id="EmpleadosViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{empleadosController.selected != null}">
+
+                        <h:outputText value="#{harlys.ViewEmpleadosLabel_idempleados}"/>
+                        <h:outputText value="#{empleadosController.selected.idempleados}" title="#{harlys.ViewEmpleadosTitle_idempleados}"/>
+
+                        <h:outputText value="#{harlys.ViewEmpleadosLabel_cedula}"/>
+                        <h:outputText value="#{empleadosController.selected.cedula}" title="#{harlys.ViewEmpleadosTitle_cedula}"/>
+
+                        <h:outputText value="#{harlys.ViewEmpleadosLabel_nombre}"/>
+                        <h:outputText value="#{empleadosController.selected.nombre}" title="#{harlys.ViewEmpleadosTitle_nombre}"/>
+
+                        <h:outputText value="#{harlys.ViewEmpleadosLabel_departamento}"/>
+                        <h:outputText value="#{empleadosController.selected.departamento}" title="#{harlys.ViewEmpleadosTitle_departamento}"/>
+
+                        <h:outputText value="#{harlys.ViewEmpleadosLabel_estado}"/>
+                        <h:outputText value="#{empleadosController.selected.estado}" title="#{harlys.ViewEmpleadosTitle_estado}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{harlys.Close}" onclick="PF('EmpleadosViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

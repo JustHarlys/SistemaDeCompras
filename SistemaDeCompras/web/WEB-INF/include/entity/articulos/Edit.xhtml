@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="ArticulosEditDlg" widgetVar="ArticulosEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{harlys.EditArticulosTitle}" closeOnEscape="true">
+
+            <h:form id="ArticulosEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{articulosController.selected != null}">
+
+
+                        <h:outputLabel value="#{harlys.EditArticulosLabel_idarticulo}" for="idarticulo" />
+                        <h:outputText id="idarticulo" value="#{articulosController.selected.idarticulo}" />
+
+                        <p:outputLabel value="#{harlys.EditArticulosLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{articulosController.selected.descripcion}" title="#{harlys.EditArticulosTitle_descripcion}" required="true" requiredMessage="#{harlys.EditArticulosRequiredMessage_descripcion}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{harlys.EditArticulosLabel_marca}" for="marca" />
+                        <p:inputText id="marca" value="#{articulosController.selected.marca}" title="#{harlys.EditArticulosTitle_marca}" required="true" requiredMessage="#{harlys.EditArticulosRequiredMessage_marca}" size="26" maxlength="26"/>
+
+                        <p:outputLabel value="#{harlys.EditArticulosLabel_unidaddemedida}" for="unidaddemedida" />
+                        <p:inputText id="unidaddemedida" value="#{articulosController.selected.unidaddemedida}" title="#{harlys.EditArticulosTitle_unidaddemedida}" required="true" requiredMessage="#{harlys.EditArticulosRequiredMessage_unidaddemedida}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{harlys.EditArticulosLabel_existencia}" for="existencia" />
+                        <p:inputText id="existencia" value="#{articulosController.selected.existencia}" title="#{harlys.EditArticulosTitle_existencia}" required="true" requiredMessage="#{harlys.EditArticulosRequiredMessage_existencia}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{harlys.EditArticulosLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{articulosController.selected.estado}" title="#{harlys.EditArticulosTitle_estado}" required="true" requiredMessage="#{harlys.EditArticulosRequiredMessage_estado}" size="100" maxlength="100"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{articulosController.save}" value="#{harlys.Save}" update="display,:ArticulosListForm:datalist,:ArticulosListForm:ArticulosDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ArticulosEditDialog'));">
+                        <p:confirm header="#{harlys.ConfirmationHeader}" message="#{harlys.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{harlys.Cancel}" oncomplete="PF('ArticulosEditDialog').hide()" update="display" process="@this" immediate="true" resetValues="true"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

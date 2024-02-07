@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pm="http://primefaces.org/mobile">
+
+    <pm:page id="ProveedoresEditPage" lazy="true">
+        <pm:header title="#{harlys.EditProveedoresTitle}">
+            <h:form>
+                <p:commandButton styleClass="ui-btn-left ui-btn-inline" value="#{harlys.Cancel}" icon="ui-icon-arrow-l" action="#{mobilePageController.navigateBackInHistory('pm:ProveedoresListPage')}"/>
+            </h:form>
+        </pm:header>
+
+        <pm:content>
+
+            <h:form id="ProveedoresEditForm">
+
+                <h:panelGroup id="display">
+                    <p:outputPanel rendered="#{proveedoresController.selected != null}">
+
+                        <pm:field>
+                            <h:outputLabel value="#{harlys.EditProveedoresLabel_idproveedor}" for="idproveedor" />
+                            <h:outputText id="idproveedor" value="#{proveedoresController.selected.idproveedor}" />
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{harlys.EditProveedoresLabel_cedulaORnc}" for="cedulaORnc" />
+                            <p:inputText id="cedulaORnc" value="#{proveedoresController.selected.cedulaORnc}" title="#{harlys.EditProveedoresTitle_cedulaORnc}" required="true" requiredMessage="#{harlys.EditProveedoresRequiredMessage_cedulaORnc}" size="100" maxlength="100"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{harlys.EditProveedoresLabel_nombrecomercial}" for="nombrecomercial" />
+                            <p:inputText id="nombrecomercial" value="#{proveedoresController.selected.nombrecomercial}" title="#{harlys.EditProveedoresTitle_nombrecomercial}" required="true" requiredMessage="#{harlys.EditProveedoresRequiredMessage_nombrecomercial}" size="26" maxlength="26"/>
+                        </pm:field>
+
+                        <pm:field>
+                            <p:outputLabel value="#{harlys.EditProveedoresLabel_estado}" for="estado" />
+                            <p:inputText id="estado" value="#{proveedoresController.selected.estado}" title="#{harlys.EditProveedoresTitle_estado}" required="true" requiredMessage="#{harlys.EditProveedoresRequiredMessage_estado}" size="100" maxlength="100"/>
+                        </pm:field>
+                    </p:outputPanel>
+                    <p:commandButton actionListener="#{proveedoresController.save}" value="#{harlys.Save}" update="#{mobilePageController.updatableWidgets(component,'display,:ProveedoresListPage:ProveedoresListForm:datalist,:growl')}" action="#{mobilePageController.navigateWithHistory('pm:ProveedoresListPage')}"/>
+
+                </h:panelGroup>
+
+            </h:form>
+
+        </pm:content>
+
+    </pm:page>
+
+</ui:composition>

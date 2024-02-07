@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="ArticulosListForm">
+
+        <p:panel header="#{harlys.ListArticulosTitle}">
+            <p:contextMenu id="ArticulosDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{harlys.Create}" onclick="document.getElementById('ArticulosListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{harlys.View}" onclick="document.getElementById('ArticulosListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{harlys.Edit}" onclick="document.getElementById('ArticulosListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{harlys.Delete}" onclick="document.getElementById('ArticulosListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{articulosController.items}"
+                         lazy="false"
+                         rowKey="#{item.idarticulo}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{articulosController.selected}"
+                         filteredValue="#{articulosController.filteredItems}">
+                <!--
+                         To enable Lazy Loading, please copy/replace the following lines above,
+                         and be sure to replace the word HASH with the # symbol:
+                
+                         value="HASH{articulosController.lazyItems}"
+                         lazy="true"
+                         rowKey="HASH{item.idarticulo}"  <<< Remove this line
+                -->
+
+
+                <p:ajax event="rowSelect"   update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ArticulosDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update="@form:createButton,@form:viewButton,@form:editButton,@form:deleteButton,@form:ArticulosDataTableContextMenu"/>
+                <p:ajax event="contextMenu" update="@form:createButton @form:viewButton @form:editButton @form:deleteButton"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('ArticulosListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.idarticulo}" filterBy="#{item.idarticulo}">
+                    <f:facet name="header">
+                        <h:outputText value="#{harlys.ListArticulosTitle_idarticulo}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.idarticulo}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.descripcion}" filterBy="#{item.descripcion}">
+                    <f:facet name="header">
+                        <h:outputText value="#{harlys.ListArticulosTitle_descripcion}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.descripcion}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.marca}" filterBy="#{item.marca}">
+                    <f:facet name="header">
+                        <h:outputText value="#{harlys.ListArticulosTitle_marca}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.marca}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.unidaddemedida}" filterBy="#{item.unidaddemedida}">
+                    <f:facet name="header">
+                        <h:outputText value="#{harlys.ListArticulosTitle_unidaddemedida}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.unidaddemedida}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.existencia}" filterBy="#{item.existencia}">
+                    <f:facet name="header">
+                        <h:outputText value="#{harlys.ListArticulosTitle_existencia}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.existencia}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.estado}" filterBy="#{item.estado}">
+                    <f:facet name="header">
+                        <h:outputText value="#{harlys.ListArticulosTitle_estado}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.estado}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{harlys.Create}" actionListener="#{articulosController.prepareCreate}" update=":ArticulosCreateForm" oncomplete="PF('ArticulosCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{harlys.View}" update=":ArticulosViewForm" oncomplete="PF('ArticulosViewDialog').show()" disabled="#{empty articulosController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{harlys.Edit}" update=":ArticulosEditForm" oncomplete="PF('ArticulosEditDialog').show()" disabled="#{empty articulosController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{harlys.Delete}" actionListener="#{articulosController.delete}" update=":growl,datalist" disabled="#{empty articulosController.selected}">
+                <p:confirm header="#{harlys.ConfirmationHeader}" message="#{harlys.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/WEB-INF/include/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>
