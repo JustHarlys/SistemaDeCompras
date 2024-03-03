@@ -19,7 +19,11 @@
                         <p:inputText id="nombre" value="#{departamentosController.selected.nombre}" title="#{harlys.CreateDepartamentosTitle_nombre}" required="true" requiredMessage="#{harlys.CreateDepartamentosRequiredMessage_nombre}" size="24" maxlength="24"/>
 
                         <p:outputLabel value="#{harlys.CreateDepartamentosLabel_estado}" for="estado" />
-                        <p:inputText id="estado" value="#{departamentosController.selected.estado}" title="#{harlys.CreateDepartamentosTitle_estado}" required="true" requiredMessage="#{harlys.CreateDepartamentosRequiredMessage_estado}" size="26" maxlength="26"/>
+                        <p:selectOneRadio id="estado" value="#{departamentosController.selected.estado}" layout="lineDirection">
+                            <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                            <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+                        </p:selectOneRadio>
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{departamentosController.saveNew}" value="#{harlys.Save}" update="display,:DepartamentosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('DepartamentosCreateDialog'));">
                         <p:confirm header="#{harlys.ConfirmationHeader}" message="#{harlys.ConfirmCreateMessage}" icon="ui-icon-alert"/>

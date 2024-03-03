@@ -28,7 +28,10 @@
                         <p:inputText id="existencia" value="#{articulosController.selected.existencia}" title="#{harlys.CreateArticulosTitle_existencia}" required="true" requiredMessage="#{harlys.CreateArticulosRequiredMessage_existencia}" size="100" maxlength="100"/>
 
                         <p:outputLabel value="#{harlys.CreateArticulosLabel_estado}" for="estado" />
-                        <p:inputText id="estado" value="#{articulosController.selected.estado}" title="#{harlys.CreateArticulosTitle_estado}" required="true" requiredMessage="#{harlys.CreateArticulosRequiredMessage_estado}" size="100" maxlength="100"/>
+                        <p:selectOneRadio id="estado" value="#{articulosController.selected.estado}" required="true" requiredMessage="#{harlys.CreateArticulosRequiredMessage_estado}">
+                            <f:selectItem itemLabel='Disponible' itemValue='Disponible'/>
+                            <f:selectItem itemLabel='No Disponible' itemValue='No Disponible'/>
+                        </p:selectOneRadio>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{articulosController.saveNew}" value="#{harlys.Save}" update="display,:ArticulosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ArticulosCreateDialog'));">
                         <p:confirm header="#{harlys.ConfirmationHeader}" message="#{harlys.ConfirmCreateMessage}" icon="ui-icon-alert"/>

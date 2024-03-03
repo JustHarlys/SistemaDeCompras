@@ -25,7 +25,10 @@
                         <p:inputText id="nombrecomercial" value="#{proveedoresController.selected.nombrecomercial}" title="#{harlys.EditProveedoresTitle_nombrecomercial}" required="true" requiredMessage="#{harlys.EditProveedoresRequiredMessage_nombrecomercial}" size="26" maxlength="26"/>
 
                         <p:outputLabel value="#{harlys.EditProveedoresLabel_estado}" for="estado" />
-                        <p:inputText id="estado" value="#{proveedoresController.selected.estado}" title="#{harlys.EditProveedoresTitle_estado}" required="true" requiredMessage="#{harlys.EditProveedoresRequiredMessage_estado}" size="100" maxlength="100"/>
+                        <p:selectOneRadio id="estado" value="#{proveedoresController.selected.estado}" layout="lineDirection">
+                            <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                            <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+                        </p:selectOneRadio>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{proveedoresController.save}" value="#{harlys.Save}" update="display,:ProveedoresListForm:datalist,:ProveedoresListForm:ProveedoresDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('ProveedoresEditDialog'));">
                         <p:confirm header="#{harlys.ConfirmationHeader}" message="#{harlys.ConfirmEditMessage}" icon="ui-icon-alert"/>

@@ -22,8 +22,10 @@
                         <p:inputText id="descripcion" value="#{marcasController.selected.descripcion}" title="#{harlys.EditMarcasTitle_descripcion}" required="true" requiredMessage="#{harlys.EditMarcasRequiredMessage_descripcion}" size="100" maxlength="100"/>
 
                         <p:outputLabel value="#{harlys.EditMarcasLabel_estado}" for="estado" />
-                        <p:inputText id="estado" value="#{marcasController.selected.estado}" title="#{harlys.EditMarcasTitle_estado}" required="true" requiredMessage="#{harlys.EditMarcasRequiredMessage_estado}" size="100" maxlength="100"/>
-                    </p:panelGrid>
+                        <p:selectOneRadio id="estado" value="#{marcasController.selected.estado}" layout="lineDirection">
+                            <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                            <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+                        </p:selectOneRadio>                    </p:panelGrid>
                     <p:commandButton actionListener="#{marcasController.save}" value="#{harlys.Save}" update="display,:MarcasListForm:datalist,:MarcasListForm:MarcasDataTableContextMenu,:growl" oncomplete="handleSubmit(xhr,status,args,PF('MarcasEditDialog'));">
                         <p:confirm header="#{harlys.ConfirmationHeader}" message="#{harlys.ConfirmEditMessage}" icon="ui-icon-alert"/>
                     </p:commandButton>

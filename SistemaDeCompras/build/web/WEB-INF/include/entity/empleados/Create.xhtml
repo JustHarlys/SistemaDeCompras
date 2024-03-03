@@ -25,7 +25,11 @@
                         <p:inputText id="departamento" value="#{empleadosController.selected.departamento}" title="#{harlys.CreateEmpleadosTitle_departamento}" required="true" requiredMessage="#{harlys.CreateEmpleadosRequiredMessage_departamento}" size="100" maxlength="100"/>
 
                         <p:outputLabel value="#{harlys.CreateEmpleadosLabel_estado}" for="estado" />
-                        <p:inputText id="estado" value="#{empleadosController.selected.estado}" title="#{harlys.CreateEmpleadosTitle_estado}" required="true" requiredMessage="#{harlys.CreateEmpleadosRequiredMessage_estado}" size="50" maxlength="50"/>
+                        <p:selectOneRadio id="estado" value="#{empleadosController.selected.estado}" layout="lineDirection">
+                            <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                            <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+                        </p:selectOneRadio>
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{empleadosController.saveNew}" value="#{harlys.Save}" update="display,:EmpleadosListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('EmpleadosCreateDialog'));">
                         <p:confirm header="#{harlys.ConfirmationHeader}" message="#{harlys.ConfirmCreateMessage}" icon="ui-icon-alert"/>

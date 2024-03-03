@@ -19,7 +19,11 @@
                         <p:inputText id="descripcion" value="#{marcasController.selected.descripcion}" title="#{harlys.CreateMarcasTitle_descripcion}" required="true" requiredMessage="#{harlys.CreateMarcasRequiredMessage_descripcion}" size="100" maxlength="100"/>
 
                         <p:outputLabel value="#{harlys.CreateMarcasLabel_estado}" for="estado" />
-                        <p:inputText id="estado" value="#{marcasController.selected.estado}" title="#{harlys.CreateMarcasTitle_estado}" required="true" requiredMessage="#{harlys.CreateMarcasRequiredMessage_estado}" size="100" maxlength="100"/>
+                        <p:selectOneRadio id="estado" value="#{marcasController.selected.estado}" layout="lineDirection">
+                            <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                            <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+                        </p:selectOneRadio>
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{marcasController.saveNew}" value="#{harlys.Save}" update="display,:MarcasListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('MarcasCreateDialog'));">
                         <p:confirm header="#{harlys.ConfirmationHeader}" message="#{harlys.ConfirmCreateMessage}" icon="ui-icon-alert"/>
